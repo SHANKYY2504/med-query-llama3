@@ -1,6 +1,6 @@
 langchain
-langchain_community
-langchain_huggingface
+langchain-community
+langchain-huggingface
 faiss-cpu
 pypdf
 huggingface_hub
@@ -8,7 +8,6 @@ flask
 python-dotenv
 langchain-text-splitters
 sentence-transformers
-langchain-huggingface
-langchain-classic
+langchain-core
 langchain-openai
 langchain-groq
