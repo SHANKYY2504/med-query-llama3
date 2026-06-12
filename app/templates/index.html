@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Medical Assistant</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="chat-container">
+
+    <div class="header">
+        <h1>🩺 AI Medical Assistant</h1>
+        <p>Ask health-related questions and receive AI-powered guidance</p>
+    </div>
+
+    {% if error %}
+    <div class="error">
+        {{ error }}
+    </div>
+    {% endif %}
+
+    <div id="chat-box">
+
+        {% for msg in messages %}
+        <div class="message {{ msg.role }}">
+            <strong>{{ msg.role.capitalize() }}</strong>
+            <div class="message-content">
+                {{ msg.content | safe }}
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <form method="POST" action="{{ url_for('index') }}">
+
+        <textarea
+            name="prompt"
+            placeholder="Describe your symptoms or ask a medical question..."
+            required
+        ></textarea>
+
+        <div class="button-group">
+            <button class="send-btn" type="submit">
+                Send Message
+            </button>
+        </div>
+
+    </form>
+
+    <form method="GET" action="{{ url_for('clear') }}">
+
+        <div class="button-group clear-container">
+            <button class="clear-btn" type="submit">
+                Clear Chat
+            </button>
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>
