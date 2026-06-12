@@ -1,4 +1,6 @@
-from langchain_huggingface import HuggingFaceEmbeddings
+import os
+# from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEndpointEmbeddings
 
 from app.common.logger import get_logger
 from app.common.custom_exception import CustomException
@@ -9,7 +11,13 @@ def get_embedding_model():
     try:
         logger.info("Intializing our Huggingface embedding model")
 
-        model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+        # model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+
+        model = HuggingFaceEndpointEmbeddings(
+            model="sentence-transformers/all-MiniLM-L6-v2",
+            task="feature-extraction",
+            huggingfacehub_api_token=os.environ.get("HF_TOKEN")
+        )
 
         logger.info("Huggingface embedding model loaded sucesfully....")
 
